@@ -11,11 +11,12 @@ kc.applyToRequest(opts);
 
 
 var namespacesstring = process.env.PODKILLER_NAMESPACES;
-var debugstr = process.env.PODKILLER_DEBUG | "false";
+var debugstr = process.env.PODKILLER_DEBUG;
 var debug = false;
-if (debugstr == "true") { debug = true;}
-var showquotes = process.env.PODKILLER_QUOTES | true;
-if(showquotes == "true") {showquotes = true;}
+if (debugstr == "true" || debugstr == true) { debug = true;}
+var showquotesstr = process.env.PODKILLER_QUOTES
+var showquotes=true;
+if(showquotesstr == "false" || showquotesstr == false) {showquotes = false;}
 
 
 
@@ -68,7 +69,7 @@ function killPodsInNamespace(ns) {
             {
                 var deleteurl = `${kc.getCurrentCluster().server}/api/v1/namespaces/`+ns+`/pods/` + podname;
                 
-                if(debug) {console.log("deleteurl" + deleteurl);}
+                if(debug) {console.log("deleteurl " + deleteurl);}
 
                 request.delete(deleteurl, opts).then
                     (function (req, podname) {
