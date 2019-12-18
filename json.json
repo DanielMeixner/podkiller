@@ -1,0 +1,662 @@
+{
+    "kind": "PodList",
+    "apiVersion": "v1",
+    "metadata": {
+        "selfLink": "/api/v1/namespaces/default/pods",
+        "resourceVersion": "19077"
+    },
+    "items": [
+        {
+            "metadata": {
+                "name": "nginx-7db9fccd9b-l5vtx",
+                "generateName": "nginx-7db9fccd9b-",
+                "namespace": "default",
+                "selfLink": "/api/v1/namespaces/default/pods/nginx-7db9fccd9b-l5vtx",
+                "uid": "eab1f136-20c4-11ea-97c2-9afe3a19a955",
+                "resourceVersion": "5279",
+                "creationTimestamp": "2019-12-17T12:01:11Z",
+                "labels": {
+                    "pod-template-hash": "7db9fccd9b",
+                    "run": "nginx"
+                },
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "kind": "ReplicaSet",
+                        "name": "nginx-7db9fccd9b",
+                        "uid": "75e50dc9-20be-11ea-97c2-9afe3a19a955",
+                        "controller": true,
+                        "blockOwnerDeletion": true
+                    }
+                ]
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "default-token-ll46q",
+                        "secret": {
+                            "secretName": "default-token-ll46q",
+                            "defaultMode": 420
+                        }
+                    },
+                    {
+                        "name": "aks-sp",
+                        "hostPath": {
+                            "path": "/etc/kubernetes",
+                            "type": ""
+                        }
+                    }
+                ],
+                "initContainers": [
+                    {
+                        "name": "devspaces-proxy-init",
+                        "image": "azds/azds-proxy-init:20191204.4",
+                        "env": [
+                            {
+                                "name": "BASE_NAMESPACES"
+                            }
+                        ],
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "capabilities": {
+                                "add": [
+                                    "NET_ADMIN"
+                                ]
+                            },
+                            "runAsUser": 0
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "nginx",
+                        "image": "nginx",
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "default-token-ll46q",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "Always"
+                    },
+                    {
+                        "name": "devspaces-proxy",
+                        "image": "azds/azds-proxy:20191204.4",
+                        "env": [
+                            {
+                                "name": "NAMESPACE",
+                                "value": "default"
+                            },
+                            {
+                                "name": "TRACE_ENDPOINT",
+                                "value": "https://azds-3f3f0ad7-eb0e-4d85-a56d-c17471aaa4dd-traces.weu.azds.io/api/v3.2/traces"
+                            },
+                            {
+                                "name": "TRACE_VERSION_KEY_HEADER",
+                                "value": "x-azds-version-key"
+                            },
+                            {
+                                "name": "TRACE_VERSION_KEY",
+                                "value": "0.1"
+                            },
+                            {
+                                "name": "LOG_LEVEL",
+                                "value": "0"
+                            },
+                            {
+                                "name": "AZDS_ENVIRONMENT",
+                                "value": "Production"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "aks-sp",
+                                "readOnly": true,
+                                "mountPath": "/etc/kubernetes"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "capabilities": {
+                                "add": [
+                                    "NET_ADMIN"
+                                ]
+                            },
+                            "runAsUser": 0
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "terminationGracePeriodSeconds": 30,
+                "dnsPolicy": "ClusterFirst",
+                "serviceAccountName": "default",
+                "serviceAccount": "default",
+                "nodeName": "aks-agentpool-39082758-vmss000000",
+                "securityContext": {},
+                "schedulerName": "default-scheduler",
+                "tolerations": [
+                    {
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "effect": "NoExecute",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "effect": "NoExecute",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "priority": 0,
+                "enableServiceLinks": true
+            },
+            "status": {
+                "phase": "Running",
+                "conditions": [
+                    {
+                        "type": "Initialized",
+                        "status": "True",
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-12-17T12:01:13Z"
+                    },
+                    {
+                        "type": "Ready",
+                        "status": "True",
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-12-17T12:01:16Z"
+                    },
+                    {
+                        "type": "ContainersReady",
+                        "status": "True",
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-12-17T12:01:16Z"
+                    },
+                    {
+                        "type": "PodScheduled",
+                        "status": "True",
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-12-17T12:01:11Z"
+                    }
+                ],
+                "hostIP": "10.240.0.4",
+                "podIP": "10.244.0.18",
+                "startTime": "2019-12-17T12:01:11Z",
+                "initContainerStatuses": [
+                    {
+                        "name": "devspaces-proxy-init",
+                        "state": {
+                            "terminated": {
+                                "exitCode": 0,
+                                "reason": "Completed",
+                                "startedAt": "2019-12-17T12:01:12Z",
+                                "finishedAt": "2019-12-17T12:01:13Z",
+                                "containerID": "docker://40a08c0dc25a65a2d198be9fe677aa7555d9686515d409ee560d118d4614054e"
+                            }
+                        },
+                        "lastState": {},
+                        "ready": true,
+                        "restartCount": 0,
+                        "image": "azds/azds-proxy-init:20191204.4",
+                        "imageID": "docker-pullable://azds/azds-proxy-init@sha256:004f1f0649ef21cf19b776c896e5021cd619de0825e7c53cbada78c80221f64a",
+                        "containerID": "docker://40a08c0dc25a65a2d198be9fe677aa7555d9686515d409ee560d118d4614054e"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "name": "devspaces-proxy",
+                        "state": {
+                            "running": {
+                                "startedAt": "2019-12-17T12:01:16Z"
+                            }
+                        },
+                        "lastState": {},
+                        "ready": true,
+                        "restartCount": 0,
+                        "image": "azds/azds-proxy:20191204.4",
+                        "imageID": "docker-pullable://azds/azds-proxy@sha256:bd1c1f37f85d9869ce9be6553388bd61e635061f44c9bb68c4220d44921af30d",
+                        "containerID": "docker://a99ff3ea93847dcb0b5434a47f056a40d0430f12e8130cfe287a86eea8b56e8b"
+                    },
+                    {
+                        "name": "nginx",
+                        "state": {
+                            "running": {
+                                "startedAt": "2019-12-17T12:01:15Z"
+                            }
+                        },
+                        "lastState": {},
+                        "ready": true,
+                        "restartCount": 0,
+                        "image": "nginx:latest",
+                        "imageID": "docker-pullable://nginx@sha256:50cf965a6e08ec5784009d0fccb380fc479826b6e0e65684d9879170a9df8566",
+                        "containerID": "docker://b6511cb8c7c0a564eb4874b764e6e6f52cbc5fa624261eea9babce69c11726c9"
+                    }
+                ],
+                "qosClass": "BestEffort"
+            }
+        },
+        {
+            "metadata": {
+                "name": "podkiller-8f6fdb87c-zk9lc",
+                "generateName": "podkiller-8f6fdb87c-",
+                "namespace": "default",
+                "selfLink": "/api/v1/namespaces/default/pods/podkiller-8f6fdb87c-zk9lc",
+                "uid": "ccd77c14-20db-11ea-97c2-9afe3a19a955",
+                "resourceVersion": "17840",
+                "creationTimestamp": "2019-12-17T14:44:59Z",
+                "labels": {
+                    "app": "podkiller",
+                    "azds.io/config": "develop59e567fbd1ac4422b3641a3f2c626ca4651a6999704a",
+                    "azds.io/container": "podkiller",
+                    "azds.io/debugging": "debug",
+                    "azds.io/service": "podkiller",
+                    "draft": "draft-app",
+                    "pod-template-hash": "8f6fdb87c",
+                    "release": "azds-09d210-default-podkiller"
+                },
+                "annotations": {
+                    "buildID": ""
+                },
+                "ownerReferences": [
+                    {
+                        "apiVersion": "apps/v1",
+                        "kind": "ReplicaSet",
+                        "name": "podkiller-8f6fdb87c",
+                        "uid": "ccc5932a-20db-11ea-97c2-9afe3a19a955",
+                        "controller": true,
+                        "blockOwnerDeletion": true
+                    }
+                ]
+            },
+            "spec": {
+                "volumes": [
+                    {
+                        "name": "default-token-ll46q",
+                        "secret": {
+                            "secretName": "default-token-ll46q",
+                            "defaultMode": 420
+                        }
+                    },
+                    {
+                        "name": "devspaces-startcmd",
+                        "emptyDir": {}
+                    },
+                    {
+                        "name": "devspaces-docker-sock",
+                        "hostPath": {
+                            "path": "/var/run/docker.sock",
+                            "type": ""
+                        }
+                    },
+                    {
+                        "name": "aks-sp",
+                        "hostPath": {
+                            "path": "/etc/kubernetes",
+                            "type": ""
+                        }
+                    },
+                    {
+                        "name": "tool-mount-0",
+                        "hostPath": {
+                            "path": "/home/azureuser/.azds-import-cache/azds-devhostagent-0.1.20",
+                            "type": ""
+                        }
+                    }
+                ],
+                "initContainers": [
+                    {
+                        "name": "devspaces-build",
+                        "image": "azds/azds-build-service:20191204.4",
+                        "args": [
+                            "build",
+                            "-t",
+                            "podkiller:devspaces-x016f1451bbd4fa82",
+                            "-f",
+                            "Dockerfile",
+                            "."
+                        ],
+                        "workingDir": "/source",
+                        "env": [
+                            {
+                                "name": "AZDS_EXEC_SERVICE_PUBLIC_FQDN",
+                                "value": "azds-3f3f0ad7-eb0e-4d85-a56d-c17471aaa4dd.weu.azds.io"
+                            },
+                            {
+                                "name": "AZDS_TELEMETRY_SERVICE_PUBLIC_FQDN",
+                                "value": "azds-3f3f0ad7-eb0e-4d85-a56d-c17471aaa4dd-telemetry.weu.azds.io"
+                            },
+                            {
+                                "name": "AZDS_SPACE_NAME",
+                                "value": "default"
+                            },
+                            {
+                                "name": "AZDS_SERVICE_NAME",
+                                "value": "podkiller"
+                            },
+                            {
+                                "name": "AZDS_REQUEST_ID",
+                                "value": "x016f1451bbd4fa82"
+                            },
+                            {
+                                "name": "AZDS_APIVERSION",
+                                "value": "3.2"
+                            },
+                            {
+                                "name": "AZDS_ENVIRONMENT",
+                                "value": "Production"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "devspaces-startcmd",
+                                "mountPath": "/startcmd"
+                            },
+                            {
+                                "name": "devspaces-docker-sock",
+                                "mountPath": "/var/run/docker.sock"
+                            },
+                            {
+                                "name": "aks-sp",
+                                "readOnly": true,
+                                "mountPath": "/etc/kubernetes"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "runAsUser": 0
+                        }
+                    },
+                    {
+                        "name": "devspaces-import-0",
+                        "image": "azds/devhostagent:0.1.20",
+                        "command": [
+                            "cp",
+                            "-u",
+                            "-r",
+                            "-v",
+                            "/.azds-agent/.",
+                            "/.import"
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "tool-mount-0",
+                                "mountPath": "/.import"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "runAsUser": 0
+                        }
+                    },
+                    {
+                        "name": "devspaces-proxy-init",
+                        "image": "azds/azds-proxy-init:20191204.4",
+                        "env": [
+                            {
+                                "name": "BASE_NAMESPACES"
+                            }
+                        ],
+                        "resources": {},
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "capabilities": {
+                                "add": [
+                                    "NET_ADMIN"
+                                ]
+                            },
+                            "runAsUser": 0
+                        }
+                    }
+                ],
+                "containers": [
+                    {
+                        "name": "podkiller",
+                        "image": "podkiller:devspaces-x016f1451bbd4fa82",
+                        "command": [
+                            "sh",
+                            "-c",
+                            "/.azds-agent/azds-agent.sh run \u003e /tmp/devhostagent.log"
+                        ],
+                        "ports": [
+                            {
+                                "name": "http",
+                                "containerPort": 80,
+                                "protocol": "TCP"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "default-token-ll46q",
+                                "readOnly": true,
+                                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                            },
+                            {
+                                "name": "devspaces-startcmd",
+                                "mountPath": "/startcmd"
+                            },
+                            {
+                                "name": "tool-mount-0",
+                                "readOnly": true,
+                                "mountPath": "/.azds-agent"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "Never"
+                    },
+                    {
+                        "name": "devspaces-proxy",
+                        "image": "azds/azds-proxy:20191204.4",
+                        "env": [
+                            {
+                                "name": "NAMESPACE",
+                                "value": "default"
+                            },
+                            {
+                                "name": "TRACE_ENDPOINT",
+                                "value": "https://azds-3f3f0ad7-eb0e-4d85-a56d-c17471aaa4dd-traces.weu.azds.io/api/v3.2/traces"
+                            },
+                            {
+                                "name": "TRACE_VERSION_KEY_HEADER",
+                                "value": "x-azds-version-key"
+                            },
+                            {
+                                "name": "TRACE_VERSION_KEY",
+                                "value": "0.1"
+                            },
+                            {
+                                "name": "LOG_LEVEL",
+                                "value": "0"
+                            },
+                            {
+                                "name": "AZDS_ENVIRONMENT",
+                                "value": "Production"
+                            }
+                        ],
+                        "resources": {},
+                        "volumeMounts": [
+                            {
+                                "name": "aks-sp",
+                                "readOnly": true,
+                                "mountPath": "/etc/kubernetes"
+                            }
+                        ],
+                        "terminationMessagePath": "/dev/termination-log",
+                        "terminationMessagePolicy": "File",
+                        "imagePullPolicy": "IfNotPresent",
+                        "securityContext": {
+                            "capabilities": {
+                                "add": [
+                                    "NET_ADMIN"
+                                ]
+                            },
+                            "runAsUser": 0
+                        }
+                    }
+                ],
+                "restartPolicy": "Always",
+                "terminationGracePeriodSeconds": 0,
+                "dnsPolicy": "ClusterFirst",
+                "serviceAccountName": "default",
+                "serviceAccount": "default",
+                "nodeName": "aks-agentpool-39082758-vmss000000",
+                "securityContext": {},
+                "schedulerName": "default-scheduler",
+                "tolerations": [
+                    {
+                        "key": "node.kubernetes.io/not-ready",
+                        "operator": "Exists",
+                        "effect": "NoExecute",
+                        "tolerationSeconds": 300
+                    },
+                    {
+                        "key": "node.kubernetes.io/unreachable",
+                        "operator": "Exists",
+                        "effect": "NoExecute",
+                        "tolerationSeconds": 300
+                    }
+                ],
+                "priority": 0,
+                "enableServiceLinks": true
+            },
+            "status": {
+                "phase": "Running",
+                "conditions": [
+                    {
+                        "type": "Initialized",
+                        "status": "True",
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-12-17T14:45:06Z"
+                    },
+                    {
+                        "type": "Ready",
+                        "status": "True",
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-12-17T14:45:07Z"
+                    },
+                    {
+                        "type": "ContainersReady",
+                        "status": "True",
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-12-17T14:45:07Z"
+                    },
+                    {
+                        "type": "PodScheduled",
+                        "status": "True",
+                        "lastProbeTime": null,
+                        "lastTransitionTime": "2019-12-17T14:44:59Z"
+                    }
+                ],
+                "hostIP": "10.240.0.4",
+                "podIP": "10.244.0.24",
+                "startTime": "2019-12-17T14:44:59Z",
+                "initContainerStatuses": [
+                    {
+                        "name": "devspaces-build",
+                        "state": {
+                            "terminated": {
+                                "exitCode": 0,
+                                "reason": "Completed",
+                                "startedAt": "2019-12-17T14:45:01Z",
+                                "finishedAt": "2019-12-17T14:45:03Z",
+                                "containerID": "docker://fc54f5e409830a416c3087b93d6f6027e73b404d0dca5fb74487a18048ca94e7"
+                            }
+                        },
+                        "lastState": {},
+                        "ready": true,
+                        "restartCount": 0,
+                        "image": "azds/azds-build-service:20191204.4",
+                        "imageID": "docker-pullable://azds/azds-build-service@sha256:adec0ddc9acbdcd35caba61912816c32f8d97be22d130427395076419ff5d90d",
+                        "containerID": "docker://fc54f5e409830a416c3087b93d6f6027e73b404d0dca5fb74487a18048ca94e7"
+                    },
+                    {
+                        "name": "devspaces-import-0",
+                        "state": {
+                            "terminated": {
+                                "exitCode": 0,
+                                "reason": "Completed",
+                                "startedAt": "2019-12-17T14:45:04Z",
+                                "finishedAt": "2019-12-17T14:45:04Z",
+                                "containerID": "docker://74d468581d2f702a993f474e309904c776960227d162bc6c6db825463a4b33b5"
+                            }
+                        },
+                        "lastState": {},
+                        "ready": true,
+                        "restartCount": 0,
+                        "image": "azds/devhostagent:0.1.20",
+                        "imageID": "docker-pullable://azds/devhostagent@sha256:f630ca2a03f8c629664d80d1cabf1abb9ef80ff1a25dea75c85ef728305337c4",
+                        "containerID": "docker://74d468581d2f702a993f474e309904c776960227d162bc6c6db825463a4b33b5"
+                    },
+                    {
+                        "name": "devspaces-proxy-init",
+                        "state": {
+                            "terminated": {
+                                "exitCode": 0,
+                                "reason": "Completed",
+                                "startedAt": "2019-12-17T14:45:05Z",
+                                "finishedAt": "2019-12-17T14:45:05Z",
+                                "containerID": "docker://f020e3feaef6a00b44ebedf5f28cd0b66c23bfed8be1ead5c5e58b4575a7ad23"
+                            }
+                        },
+                        "lastState": {},
+                        "ready": true,
+                        "restartCount": 0,
+                        "image": "azds/azds-proxy-init:20191204.4",
+                        "imageID": "docker-pullable://azds/azds-proxy-init@sha256:004f1f0649ef21cf19b776c896e5021cd619de0825e7c53cbada78c80221f64a",
+                        "containerID": "docker://f020e3feaef6a00b44ebedf5f28cd0b66c23bfed8be1ead5c5e58b4575a7ad23"
+                    }
+                ],
+                "containerStatuses": [
+                    {
+                        "name": "devspaces-proxy",
+                        "state": {
+                            "running": {
+                                "startedAt": "2019-12-17T14:45:07Z"
+                            }
+                        },
+                        "lastState": {},
+                        "ready": true,
+                        "restartCount": 0,
+                        "image": "azds/azds-proxy:20191204.4",
+                        "imageID": "docker-pullable://azds/azds-proxy@sha256:bd1c1f37f85d9869ce9be6553388bd61e635061f44c9bb68c4220d44921af30d",
+                        "containerID": "docker://d100707ae41324b3371eca32ee70929913d6ff12ef417def2822a14af593d4f2"
+                    },
+                    {
+                        "name": "podkiller",
+                        "state": {
+                            "running": {
+                                "startedAt": "2019-12-17T14:45:06Z"
+                            }
+                        },
+                        "lastState": {},
+                        "ready": true,
+                        "restartCount": 0,
+                        "image": "podkiller:devspaces-x016f1450f3b0d583",
+                        "imageID": "docker://sha256:71c12f533ddbc9dd3db2caaf5c5ed7f7c57016808f5cb2dffc7508d735b20c97",
+                        "containerID": "docker://a2f8d736d1683d7796b3545b053039a017ebd9dd195b699dc12ac084545888f9"
+                    }
+                ],
+                "qosClass": "BestEffort"
+            }
+        }
+    ]
+}
