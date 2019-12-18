@@ -18,3 +18,6 @@ kubectl run podkiller --image danielmeixner/podkiller --env=PODKILLER_NAMESPACES
 - PODKILLER_QUOTES
 
     Just a little fun in the output. Defaults to true. Life is hard enough.
+
+# One more thing.
+This was written using Azure DevSpaces. It's awesome. Give it a try. https://docs.microsoft.com/en-us/azure/dev-spaces/get-started-nodejs
